@@ -1,0 +1,78 @@
+CM demonstration verification (run locally during creation; not a GitHub-hosted run)
+
+$ python -m unittest discover -v -p test*.py
+Exit code: 0
+e_run_stores_response_ids_and_exports_usage) ... ok
+test_no_key_fails_before_request (test_live_api_mock.LiveAdapterContractTests.test_no_key_fails_before_request) ... ok
+test_permanent_error_cannot_be_retried_as_a_success (test_live_api_mock.LiveAdapterContractTests.test_permanent_error_cannot_be_retried_as_a_success) ... ok
+test_responses_endpoint_payload_json_schema_and_usage (test_live_api_mock.LiveAdapterContractTests.test_responses_endpoint_payload_json_schema_and_usage) ... ok
+test_both_prompt_conditions_state_same_formula_and_thresholds (test_protocol_v2.ProtocolV2Tests.test_both_prompt_conditions_state_same_formula_and_thresholds) ... ok
+test_exact_reference_score_for_failed_pilot_example (test_protocol_v2.ProtocolV2Tests.test_exact_reference_score_for_failed_pilot_example) ... ok
+test_invalid_output_raw_evidence_survives_without_score_substitution (test_protocol_v2.ProtocolV2Tests.test_invalid_output_raw_evidence_survives_without_score_substitution) ... ok
+test_parser_never_corrects_inconsistent_model_output (test_protocol_v2.ProtocolV2Tests.test_parser_never_corrects_inconsistent_model_output) ... ok
+test_protocol_version_updated (test_protocol_v2.ProtocolV2Tests.test_protocol_version_updated) ... ok
+test_raw_model_score_arithmetic_mismatch_is_audited_not_fixed (test_protocol_v2.ProtocolV2Tests.test_raw_model_score_arithmetic_mismatch_is_audited_not_fixed) ... ok
+test_inconsistent_labels_are_rejected_not_corrected (test_research_guardrails.ResearchGuardrailTests.test_inconsistent_labels_are_rejected_not_corrected) ... ok
+test_non_finite_or_out_of_range_scores_rejected (test_research_guardrails.ResearchGuardrailTests.test_non_finite_or_out_of_range_scores_rejected) ... ok
+test_numeric_prompt_injection_rejected_before_api (test_research_guardrails.ResearchGuardrailTests.test_numeric_prompt_injection_rejected_before_api) ... ok
+test_run_retains_selected_ids_code_hash_and_attempt_history (test_research_guardrails.ResearchGuardrailTests.test_run_retains_selected_ids_code_hash_and_attempt_history) ... ok
+test_same_professional_qualifications_and_no_hiring_label (test_research_guardrails.ResearchGuardrailTests.test_same_professional_qualifications_and_no_hiring_label) ... ok
+test_schema_error_preserves_raw_model_output_and_excludes_case (test_research_guardrails.ResearchGuardrailTests.test_schema_error_preserves_raw_model_output_and_excludes_case) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.628s
+
+OK
+
+
+$ python audit_dataset.py recruitment_data.csv
+Exit code: 0
+{
+  "file": "recruitment_data.csv",
+  "rows": 1500,
+  "columns": [
+    "Age",
+    "Gender",
+    "EducationLevel",
+    "ExperienceYears",
+    "PreviousCompanies",
+    "DistanceFromCompany",
+    "InterviewScore",
+    "SkillScore",
+    "PersonalityScore",
+    "RecruitmentStrategy",
+    "HiringDecision"
+  ],
+  "sha256": "282faa349f5e6a817c347209502be41212d2eb2b4985bfd5c45ce3308221f68a",
+  "blank_cells": 0,
+  "exact_duplicates": 0,
+  "gender_counts": {
+    "1": 738,
+    "0": 762
+  },
+  "hiring_decision_counts": {
+    "1": 465,
+    "0": 1035
+  },
+  "validated_profiles": 1500,
+  "notice": "HiringDecision is excluded from model prompts. Group codes 0/1 are not assumed to be gender labels."
+}
+
+
+$ python run_live.py --dry-run --limit 2 --repeats 1
+Exit code: 0
+
+LIVE EXPERIMENT PLAN: 2 pairs × 2 demographic codes × 2 prompts × 1 repeat(s) = 8 PAID API calls (before retries).
+Model: gpt-4.1-mini. Data: recruitment_data.csv. This is NOT a real employer hiring decision.
+Maximum API attempts if every call is retried: 24 (normally fewer).
+Real model responses, errors and token usage will be recorded; no deterministic fallback will be used.
+DRY RUN COMPLETE: no API requests or charges.
+
+
+
+Git history:
+*   7d21f70 (HEAD -> main, tag: cm-exercise-v1.0) Merge CM documentation and workflow
+|\  
+| * 5f1c4a8 (feature/cm-documentation) Document configuration management and add offline CI checks
+|/  
+* e75c50f Baseline: preserve FairHire AI Protocol V2 source and tests
