@@ -1,0 +1,8 @@
+GRAD 695 — Applied Project
+Assignment: YouTube Code Walkthrough
+Project: FairHireAI
+
+YouTube video link: PASTE_YOUR_ACTUAL_YOUTUBE_URL_HERE
+Video length: Under 10 minutes
+
+Summary: I explain the code for data validation, paired candidate creation, prompt strategies, the real API adapter, SQLite persistence, comparative metrics and local automated tests.

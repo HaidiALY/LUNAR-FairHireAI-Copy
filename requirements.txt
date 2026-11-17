@@ -1,0 +1,2 @@
+# Python 3.10+ standard library only. No pip install is required.
+# The live OpenAI Responses API uses urllib.request, not an external SDK.

@@ -1,0 +1,8 @@
+GRAD 695 — Applied Project
+Assignment: YouTube Project Demonstration
+Project: FairHireAI
+
+YouTube video link: PASTE_YOUR_ACTUAL_YOUTUBE_URL_HERE
+Video length: Under 10 minutes
+
+Summary: I demonstrate the data audit, automated tests, real OpenAI API run, HTML results report, saved API usage evidence, and limitations of the paired audit.
